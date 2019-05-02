@@ -13,7 +13,7 @@ Homework 16 UM Coding Bootcamp
 - The user interface was broke up into components and states that changed with each user intervention.
 - MongoDB is used to save the book list.
 
-![Home Page](https://github.com/sespert/react-books-search/blob/master/react-books-search/assets/screenshot.png)
+![Home Page](https://github.com/sespert/react-books-search/blob/master/assets/screenshot.png)
 
 ## Tech/Framed Used
 
