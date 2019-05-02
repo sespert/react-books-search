@@ -1,10 +1,12 @@
 import React from "react";
+import "./style.css";
 
 function Jumbotron () {
     return (
         <div className="jumbotron" style={{ height: 300, textAlign: "center"}}>
-            <h3>Google Books Search</h3>
-            <h4>Search for books and save your favorites</h4>
+            <h1>Google Books Search</h1>
+            <hr className="my-4"/>
+            <h4>Search for books in the Google Books database, then save your favorites to a list to be displayed whenever you need them</h4>
         </div>
     );
 }

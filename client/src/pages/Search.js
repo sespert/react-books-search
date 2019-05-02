@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import API from "../utils/API";
-import CardSearch from "../components/CardSearch";
+import MediaSearch from "../components/MediaSearch";
 import Form from '../components/Form';
 import { Container, Row, Col } from "../components/Grid";
 import SearchButton from "../components/SearchButton";
@@ -12,7 +12,7 @@ class Search extends Component {
         bookSearch: ""
       }
     
-
+      //When user types a book name, this is being triggered
       handleInputChange = e => {
         const { name, value } = e.target;
         this.setState({
@@ -20,6 +20,7 @@ class Search extends Component {
         });
       };
 
+      //When user clicks on Search button, the google api is being reached with the input
       handleFormSubmit = e => {
         e.preventDefault();
         API.getBook(this.state.bookSearch)
@@ -30,6 +31,7 @@ class Search extends Component {
           .catch(err => console.log(err));      
       };
 
+      //When a save button from a book is clicked, its info is saved to a MongoDB
       handleSaveButton = e => {
         e.preventDefault();
         const index = e.target.id;
@@ -64,62 +66,58 @@ class Search extends Component {
 
       render() {
         return (
-            <div>                
-                
-                <Container>
-
-                  <Row>
-                  <Col size="md-12">
-                  <form>
-                  <Container>
-                    <Row>
-                      <Col size="xs-9 sm-10">               
-                        <Form name="bookSearch"
-                        value={this.state.bookSearch}
-                        onChange={this.handleInputChange}
-                        />
-                      </Col>
-                      <Col size="xs-3 sm-2">
-                      <SearchButton
-                        onClick={this.handleFormSubmit}
-                        type="success"
-                        className="input-lg"
-                      >
-                        Search
-                      </SearchButton>
-                    </Col>
-                    </Row>
-                  </Container>
-                  </form>
+          <div>  
+            <Container>
+              <Row>
+              <Col size="md-12">
+              <form>
+                <Row>
+                  <Col size="md-9">               
+                    <Form name="bookSearch"
+                    value={this.state.bookSearch}
+                    onChange={this.handleInputChange}
+                    />
                   </Col>
-                  </Row>
+                  <Col size="md-3">
+                  <SearchButton
+                    onClick={this.handleFormSubmit}
+                    type="success"
+                    className="input-lg"
+                  >
+                    Search
+                  </SearchButton>
+                  </Col>
+                </Row>
+              </form>
+              </Col>
+              </Row>
 
-                  <Row>
-                  {!this.state.books.length ? (
-                    <h1>No books to display</h1>
-                  ) : (
-                    this.state.books.map((book,index) => {
-                      return(
-                       
-                        <CardSearch 
-                          key = {book.id}
-                          title = {book.volumeInfo.title}
-                          authors = {book.volumeInfo.authors}
-                          image = {book.volumeInfo.imageLinks.thumbnail}
-                          description = {book.volumeInfo.description}
-                          href = {book.volumeInfo.previewLink} 
-                          handleSaveButton = {this.handleSaveButton}
-                          id = {index}
-                        />
-                      
-                      )
-                    })
-                       
-                  )  }   
-                  </Row>
+              <Row>
+              {!this.state.books.length ? (
+                <h1 style={{ marginTop: '100px', marginLeft: '400px'}}>No books to display</h1>
+              ) : (
+                this.state.books.map((book,index) => {
+                  return(
+                    
+                    <MediaSearch 
+                      key = {book.id}
+                      title = {book.volumeInfo.title}
+                      authors = {book.volumeInfo.authors}
+                      image = {book.volumeInfo.imageLinks.smallThumbnail}
+                      description = {book.volumeInfo.description}
+                      href = {book.volumeInfo.previewLink} 
+                      handleSaveButton = {this.handleSaveButton}
+                      id = {index}
+                    />
+                  
+                  )
+                })
+                    
+              )  }   
+              </Row>
 
-                </Container>        
-            </div>
+            </Container>        
+          </div>
         )
       }
 }

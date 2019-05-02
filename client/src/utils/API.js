@@ -13,10 +13,12 @@ export default {
     return axios.post("/api/books", bookData);
   },
   
+  //Get books from the Mongo database
   getDBBooks: function() {
     return axios.get("/api/books");
   },
 
+  //Deletes a book from the MongoDB
   deleteBook: function(id) {
     return axios.delete("/api/books/" + id);
   }
