@@ -1,25 +1,124 @@
 import React, { Component } from 'react';
+import API from "../utils/API";
 import CardSearch from "../components/CardSearch";
-import Nav from "../components/Nav";
-import Jumbotron from '../components/Jumbotron';
 import Form from '../components/Form';
+import { Container, Row, Col } from "../components/Grid";
+import SearchButton from "../components/SearchButton";
 
 class Search extends Component {
     
     state = {
-        title: "Harry Potter",
-        author: "J.K.Rowling",
-        image: "https://i5.walmartimages.com/asr/0b185ded-f049-4aa2-9b88-7d00d356dd70_1.055b2096333ff137a3f7d6983f018cdf.jpeg?odnHeight=450&odnWidth=450&odnBg=FFFFFF",
-        synopsis: "It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like)."
+        books:[],
+        bookSearch: ""
       }
+    
+
+      handleInputChange = e => {
+        const { name, value } = e.target;
+        this.setState({
+          [name]: value
+        });
+      };
+
+      handleFormSubmit = e => {
+        e.preventDefault();
+        API.getBook(this.state.bookSearch)
+          .then(res => {
+            console.log(res.data.items);
+            this.setState({ books: res.data.items });
+          })
+          .catch(err => console.log(err));      
+      };
+
+      handleSaveButton = e => {
+        e.preventDefault();
+        const index = e.target.id;
+        const nextI = parseInt(e.target.id) + 1;
+        const newBook = this.state.books.slice(index, nextI);
+        let titleS = "";
+        let imageS = "";
+        let authorsS = [];
+        let descriptionS = "";
+        let hrefS = "";
+
+        newBook.map(ele => {
+          return (
+            titleS = ele.volumeInfo.title,
+            imageS = ele.volumeInfo.imageLinks.thumbnail,
+            authorsS = ele.volumeInfo.authors,
+            descriptionS = ele.volumeInfo.description,
+            hrefS = ele.volumeInfo.previewLink
+          )
+         })
+
+        API.saveBook({
+          title: titleS,
+          image: imageS,
+          authors: authorsS,
+          description: descriptionS,
+          href: hrefS
+        }).then(res => alert("book saved"))
+        .catch(err => console.log(err));
+      
+      };
 
       render() {
         return (
             <div>                
-                <Nav />
-                <Jumbotron />
-                <Form />
-                <CardSearch image ={this.state.image} author={this.state.author} title={this.state.title} synopsis={this.state.synopsis} />
+                
+                <Container>
+
+                  <Row>
+                  <Col size="md-12">
+                  <form>
+                  <Container>
+                    <Row>
+                      <Col size="xs-9 sm-10">               
+                        <Form name="bookSearch"
+                        value={this.state.bookSearch}
+                        onChange={this.handleInputChange}
+                        />
+                      </Col>
+                      <Col size="xs-3 sm-2">
+                      <SearchButton
+                        onClick={this.handleFormSubmit}
+                        type="success"
+                        className="input-lg"
+                      >
+                        Search
+                      </SearchButton>
+                    </Col>
+                    </Row>
+                  </Container>
+                  </form>
+                  </Col>
+                  </Row>
+
+                  <Row>
+                  {!this.state.books.length ? (
+                    <h1>No books to display</h1>
+                  ) : (
+                    this.state.books.map((book,index) => {
+                      return(
+                       
+                        <CardSearch 
+                          key = {book.id}
+                          title = {book.volumeInfo.title}
+                          authors = {book.volumeInfo.authors}
+                          image = {book.volumeInfo.imageLinks.thumbnail}
+                          description = {book.volumeInfo.description}
+                          href = {book.volumeInfo.previewLink} 
+                          handleSaveButton = {this.handleSaveButton}
+                          id = {index}
+                        />
+                      
+                      )
+                    })
+                       
+                  )  }   
+                  </Row>
+
+                </Container>        
             </div>
         )
       }

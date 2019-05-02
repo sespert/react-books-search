@@ -1,5 +1,4 @@
 import React from "react";
-// import "./style.css";
 
 function Nav() {
     return (
@@ -14,7 +13,7 @@ function Nav() {
                         <a className="nav-link" href="/">Search<span className="sr-only">(current)</span></a>
                     </li>
                     <li className="nav-item">
-                        <a className="nav-link" href="/">Saved</a>
+                        <a className="nav-link" href="/books">Saved</a>
                     </li>
                 </ul>
             </div>
