@@ -31,3 +31,23 @@ patch:
         patched: '2019-07-04T06:13:41.190Z'
     - snyk > snyk-go-plugin > graphlib > lodash:
         patched: '2019-07-04T06:13:41.190Z'
+    - snyk > lodash:
+        patched: '2019-09-06T20:10:06.507Z'
+    - mongoose > async > lodash:
+        patched: '2019-09-06T20:10:06.507Z'
+    - snyk > snyk-nuget-plugin > lodash:
+        patched: '2019-09-06T20:10:06.507Z'
+    - snyk > snyk-nodejs-lockfile-parser > lodash:
+        patched: '2019-09-06T20:10:06.507Z'
+    - snyk > @snyk/dep-graph > lodash:
+        patched: '2019-09-06T20:10:06.507Z'
+    - snyk > inquirer > lodash:
+        patched: '2019-09-06T20:10:06.507Z'
+    - snyk > snyk-config > lodash:
+        patched: '2019-09-06T20:10:06.507Z'
+    - snyk > @snyk/dep-graph > graphlib > lodash:
+        patched: '2019-09-06T20:10:06.507Z'
+    - snyk > snyk-nodejs-lockfile-parser > graphlib > lodash:
+        patched: '2019-09-06T20:10:06.507Z'
+    - snyk > snyk-go-plugin > graphlib > lodash:
+        patched: '2019-09-06T20:10:06.507Z'
