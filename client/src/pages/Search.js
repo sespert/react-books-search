@@ -4,6 +4,7 @@ import MediaSearch from "../components/MediaSearch";
 import Form from '../components/Form';
 import { Container, Row, Col } from "../components/Grid";
 import SearchButton from "../components/SearchButton";
+// import image from "../assets/generic-book-cover.jpg"
 
 class Search extends Component {
     
