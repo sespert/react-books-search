@@ -95,7 +95,7 @@ class Search extends Component {
 
               <Row>
               {!this.state.books.length ? (
-                <h1 style={{ marginTop: '100px', marginLeft: '400px'}}>No books to display</h1>
+                <h1 style={{ marginTop: '100px', marginLeft: '400px'}}>No books available to display</h1>
               ) : (
                 this.state.books.map((book,index) => {
                   return(
