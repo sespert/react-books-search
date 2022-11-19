@@ -1,10 +1,11 @@
 {
   "name": "mern",
   "version": "1.0.0",
-  "description": "Mern Demo",
   "engines": {
-    "node": "16.x"
+    "node": "16.x",
+    "npm": "8.11.0"
   },
+  "description": "Mern Demo",
   "main": "server.js",
   "scripts": {
     "start": "if-env NODE_ENV=production && npm run start:prod || npm run start:dev",
